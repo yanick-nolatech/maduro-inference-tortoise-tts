@@ -23,3 +23,7 @@ py-cpuinfo
 hjson
 psutil
 sounddevice
+hangul-romanize==0.1.0
+num2words==0.5.13
+spacy
+pypinyin==0.51.0

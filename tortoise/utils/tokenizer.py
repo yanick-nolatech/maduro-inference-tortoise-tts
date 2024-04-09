@@ -4,7 +4,7 @@ import re
 import inflect
 import torch
 from tokenizers import Tokenizer
-
+from .custom import multilingual_cleaners 
 
 # Regular expression matching whitespace:
 from unidecode import unidecode
@@ -141,10 +141,8 @@ def transliteration_cleaners(text):
 
 def english_cleaners(text):
   '''Pipeline for English text, including number and abbreviation expansion.'''
-  text = convert_to_ascii(text)
+  text = multilingual_cleaners(text, lang='es')
   text = lowercase(text)
-  text = expand_numbers(text)
-  text = expand_abbreviations(text)
   text = collapse_whitespace(text)
   text = text.replace('"', '')
   return text
@@ -165,8 +163,8 @@ def lev_distance(s1, s2):
     distances = distances_
   return distances[-1]
 
-
-DEFAULT_VOCAB_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../data/tokenizer.json')
+DEFAULT_VOCAB_FILENAME = os.environ.get('DEFAULT_VOCAB_FILENAME', '../data/tokenizer.json')
+DEFAULT_VOCAB_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)), DEFAULT_VOCAB_FILENAME)
 
 
 class VoiceBpeTokenizer:
