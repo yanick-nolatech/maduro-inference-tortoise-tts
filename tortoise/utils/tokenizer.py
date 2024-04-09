@@ -163,8 +163,9 @@ def lev_distance(s1, s2):
     distances = distances_
   return distances[-1]
 
-DEFAULT_VOCAB_FILENAME = os.environ.get('DEFAULT_VOCAB_FILENAME', '../data/tokenizer.json')
-DEFAULT_VOCAB_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)), DEFAULT_VOCAB_FILENAME)
+
+_DEFAULT_VOCAB_FILE = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../data/tokenizer.json')
+DEFAULT_VOCAB_FILE = os.environ.get('DEFAULT_VOCAB_FILENAME', _DEFAULT_VOCAB_FILE)
 
 
 class VoiceBpeTokenizer:
